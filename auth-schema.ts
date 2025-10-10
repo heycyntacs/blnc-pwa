@@ -1,8 +1,6 @@
-import { text, timestamp, boolean, pgSchema } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, boolean } from "drizzle-orm/pg-core";
 
-export const authSchema = pgSchema("better-auth");
-
-export const user = authSchema.table("user", {
+export const user = pgTable("user", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
   email: text("email").notNull().unique(),
@@ -15,7 +13,7 @@ export const user = authSchema.table("user", {
     .notNull(),
 });
 
-export const session = authSchema.table("session", {
+export const session = pgTable("session", {
   id: text("id").primaryKey(),
   expiresAt: timestamp("expires_at").notNull(),
   token: text("token").notNull().unique(),
@@ -30,7 +28,7 @@ export const session = authSchema.table("session", {
     .references(() => user.id, { onDelete: "cascade" }),
 });
 
-export const account = authSchema.table("account", {
+export const account = pgTable("account", {
   id: text("id").primaryKey(),
   accountId: text("account_id").notNull(),
   providerId: text("provider_id").notNull(),
@@ -50,7 +48,7 @@ export const account = authSchema.table("account", {
     .notNull(),
 });
 
-export const verification = authSchema.table("verification", {
+export const verification = pgTable("verification", {
   id: text("id").primaryKey(),
   identifier: text("identifier").notNull(),
   value: text("value").notNull(),

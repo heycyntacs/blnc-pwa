@@ -16,7 +16,7 @@ interface AuthButtonProps {
 export default function AuthButton({ provider, className }: AuthButtonProps) {
   const { data, isPending } = authClient.useSession();
 
-  const handleClick = () => {
+  const handleLogin = () => {
     authClient.signIn.social({
       provider: provider.provider,
     });
@@ -29,7 +29,7 @@ export default function AuthButton({ provider, className }: AuthButtonProps) {
   if (!data) {
     return (
       <Button
-        onClick={handleClick}
+        onClick={handleLogin}
         disabled={isPending}
         className={cn("gap-1", className)}
       >

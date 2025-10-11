@@ -2,13 +2,23 @@
 
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
+import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
-export default function GoogleButton() {
-  const { data, isPending, error } = authClient.useSession();
+
+interface AuthButtonProps {
+  provider: {
+    provider: string;
+    name: string;
+  };
+  className?: string;
+}
+
+export default function AuthButton({ provider, className }: AuthButtonProps) {
+  const { data, isPending } = authClient.useSession();
 
   const handleClick = () => {
     authClient.signIn.social({
-      provider: "google",
+      provider: provider.provider,
     });
   };
 
@@ -18,9 +28,13 @@ export default function GoogleButton() {
 
   if (!data) {
     return (
-      <Button onClick={handleClick} disabled={isPending}>
+      <Button
+        onClick={handleClick}
+        disabled={isPending}
+        className={cn("gap-1", className)}
+      >
         {isPending && <Loader2 className="animate-spin" />}
-        Sign in with Google
+        Sign in with<span className="capitalize">{provider.name}</span>
       </Button>
     );
   }

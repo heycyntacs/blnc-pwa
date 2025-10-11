@@ -40,9 +40,8 @@ export default function AuthButton({ provider, className }: AuthButtonProps) {
   }
 
   return (
-    <div className="flex justify-center flex-col gap-4">
-      <div className="flex items-center">Hello, {data.user.name}!</div>
-      <Button onClick={handleLogout}>Sign out</Button>
-    </div>
+    <Button onClick={handleLogout} variant="secondary">
+      Sign out
+    </Button>
   );
 }

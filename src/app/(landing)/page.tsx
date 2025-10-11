@@ -1,5 +1,5 @@
 import { AUTH_PROVIDERS } from "@/constants";
-import AuthButton from "./_components/google-button";
+import AuthButton from "./_components/auth-button";
 
 export default function Home() {
   return (

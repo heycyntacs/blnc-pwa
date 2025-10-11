@@ -1,5 +1,5 @@
 import { AUTH_PROVIDERS } from "@/constants";
-import AuthButton from "./_components/auth-button";
+import AuthButton from "../../components/common/auth-button";
 
 export default function Home() {
   return (

@@ -16,7 +16,7 @@ interface AuthButtonProps {
 
 export default function AuthButton({ provider, className }: AuthButtonProps) {
   const { data, isPending } = authClient.useSession();
-
+  const router = useRouter();
   const handleLogin = () => {
     authClient.signIn.social({
       provider: provider.provider,
@@ -25,7 +25,11 @@ export default function AuthButton({ provider, className }: AuthButtonProps) {
   };
 
   const handleLogout = () => {
-    authClient.signOut();
+    authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => router.push("/"),
+      },
+    });
   };
 
   if (!data) {

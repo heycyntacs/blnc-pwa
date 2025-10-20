@@ -85,7 +85,9 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <Button onClick={handleLogout}>Sign out</Button>
+        <Button variant="secondary" onClick={handleLogout}>
+          Sign out
+        </Button>
       </SidebarFooter>
     </Sidebar>
   );

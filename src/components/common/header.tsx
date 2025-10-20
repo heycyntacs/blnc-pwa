@@ -10,7 +10,7 @@ import { usePathname } from "next/navigation";
 import Logo from "./logo";
 
 export default function Header() {
-  const session = authClient.getSession();
+  const { data: session } = authClient.useSession();
   const pathname = usePathname();
 
   if (pathname !== "/") return;

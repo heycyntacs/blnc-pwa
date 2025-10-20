@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface AuthButtonProps {
   provider: {
@@ -19,6 +20,7 @@ export default function AuthButton({ provider, className }: AuthButtonProps) {
   const handleLogin = () => {
     authClient.signIn.social({
       provider: provider.provider,
+      callbackURL: "/dashboard",
     });
   };
 

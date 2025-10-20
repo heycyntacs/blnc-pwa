@@ -1,8 +1,11 @@
+"use client";
+
 import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
 
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -10,6 +13,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { Button } from "../ui/button";
+import { auth } from "@/lib/auth";
+import { authClient } from "@/lib/auth-client";
+import { redirect, useRouter } from "next/navigation";
 
 // Menu items.
 const items = [
@@ -41,6 +48,19 @@ const items = [
 ];
 
 export function AppSidebar() {
+  const auth = authClient;
+  const router = useRouter();
+
+  const handleLogout = () => {
+    auth.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          router.push("/");
+        },
+      },
+    });
+  };
+
   return (
     <Sidebar>
       <SidebarContent>
@@ -64,6 +84,9 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <Button onClick={handleLogout}>Sign out</Button>
+      </SidebarFooter>
     </Sidebar>
   );
 }
